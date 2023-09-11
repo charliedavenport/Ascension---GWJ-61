@@ -5,6 +5,9 @@ var max_speed = 50.0
 var accel = 8.5
 var decel = 0.25
 
+var fall_accell = 10.0
+var max_fall_speed = 75.0
+
 var has_control : bool
 var lock_state : bool
 
@@ -89,9 +92,21 @@ func state_updated(old_state, new_state) -> void:
 
 
 func ascend() -> void:
+	# TODO set state
+	# TODO directional ascend anim
 	anim.play("ascend")
 	has_control = false
 	lock_state = true
+
+
+func fall()-> void:
+	anim.play("fall")
+	shadow_sprite.hide()
+	has_control = false
+	lock_state = true
+	
+	# TODO directional fall anim
+	state = PlayerState.Fall
 
 
 func get_animation_name(_state, _dir) -> String:
